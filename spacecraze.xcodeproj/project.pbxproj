@@ -108,7 +108,6 @@
 				459B9B942A7054A50080360E /* APODView.swift */,
 				4570AA112A71F2D900E69B0B /* DetailButtonView.swift */,
 				459B9B9D2A70E8EE0080360E /* SearchViews */,
-				459B9B9F2A70EF680080360E /* Events */,
 				459B9B9B2A70E5B30080360E /* TestView.swift */,
 			);
 			path = Views;
@@ -121,13 +120,6 @@
 				459B9B962A70DBC80080360E /* HistoricalApodView.swift */,
 			);
 			path = SearchViews;
-			sourceTree = "<group>";
-		};
-		459B9B9F2A70EF680080360E /* Events */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Events;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

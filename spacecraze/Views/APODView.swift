@@ -52,17 +52,27 @@ struct APODView: View {
                               
                               DispatchQueue.main.async {
                                   UIImageWriteToSavedPhotosAlbum(UIImage(data: data)!, nil, nil, nil)
+                                  isShowing = true
                               }
                               
                           }
                             task.resume()
                       }
+                      
 
-                      } label: {
+                      }
+                  
+
+                        label: {
                       Image(systemName: "square.and.arrow.down")
                   }
+                        .alert("Image Downloaded", isPresented: $isShowing) {
+                            Button("Ok", role: .cancel) {}
+                        }
+                      
                   .tint(.primary)
               }
+              
           }
           .navigationBarTitleDisplayMode(.inline)
       }
