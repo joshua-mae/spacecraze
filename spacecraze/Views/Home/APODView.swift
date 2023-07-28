@@ -5,18 +5,18 @@
 //  Created by Joshua Mae on 7/25/23.
 //
 
-// Handle videos and images
+// Change uiscreenmainbounds --> deprecated soon
 
 import SwiftUI
 import AVKit
 
 struct APODView: View {
 
-  @EnvironmentObject private var viewModel: APODViewModel
-    @State private var isShowing = false
-
+    @EnvironmentObject private var viewModel: APODViewModel
+    @State private var infoIsShowing = false
+    @State private var isDownloaded = false
     
-  var body: some View {
+    var body: some View {
       
       NavigationView {
           ScrollView{
@@ -31,16 +31,15 @@ struct APODView: View {
           .toolbar {
               ToolbarItem(placement: .navigationBarLeading) {
                   Button {
-                      isShowing = true
+                      infoIsShowing = true
+                      
                   } label: {
                       Image(systemName: "info.circle")
                   }
-                  .overlay(alignment: .bottom) {
-                      if isShowing{
-                          DetailButtonView()
-                      }
-                  }
-                  .ignoresSafeArea()
+                  .sheet(isPresented: $infoIsShowing) {
+                      DetailButtonView()
+                          .presentationDetents([.medium])
+                    }
 
                   .tint(.primary)
               }
@@ -49,27 +48,22 @@ struct APODView: View {
                       if let apod = viewModel.apod {
                           let task = URLSession.shared.dataTask(with: apod.hdurl!) {data, _, _ in
                               guard let data = data else {return}
-                              
+
                               DispatchQueue.main.async {
                                   UIImageWriteToSavedPhotosAlbum(UIImage(data: data)!, nil, nil, nil)
-                                  isShowing = true
                               }
-                              
+
                           }
                             task.resume()
                       }
-                      
-
                       }
-                  
-
                         label: {
                       Image(systemName: "square.and.arrow.down")
                   }
-                        .alert("Image Downloaded", isPresented: $isShowing) {
+                        .alert("Image Downloaded", isPresented: $isDownloaded) {
                             Button("Ok", role: .cancel) {}
                         }
-                      
+
                   .tint(.primary)
               }
               

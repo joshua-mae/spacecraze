@@ -17,7 +17,6 @@
 		459B9B952A7054A50080360E /* APODView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B942A7054A50080360E /* APODView.swift */; };
 		459B9B972A70DBC80080360E /* HistoricalApodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B962A70DBC80080360E /* HistoricalApodView.swift */; };
 		459B9B9A2A70E0530080360E /* HistoricalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B992A70E0530080360E /* HistoricalViewModel.swift */; };
-		459B9B9C2A70E5B30080360E /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B9B2A70E5B30080360E /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		459B9B942A7054A50080360E /* APODView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODView.swift; sourceTree = "<group>"; };
 		459B9B962A70DBC80080360E /* HistoricalApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalApodView.swift; sourceTree = "<group>"; };
 		459B9B992A70E0530080360E /* HistoricalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalViewModel.swift; sourceTree = "<group>"; };
-		459B9B9B2A70E5B30080360E /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +45,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		454F22FB2A7341F700D2DA7C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4570AA112A71F2D900E69B0B /* DetailButtonView.swift */,
+				459B9B942A7054A50080360E /* APODView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		459B9B732A7050550080360E = {
 			isa = PBXGroup;
 			children = (
@@ -105,10 +112,8 @@
 		459B9B8F2A7050EE0080360E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				459B9B942A7054A50080360E /* APODView.swift */,
-				4570AA112A71F2D900E69B0B /* DetailButtonView.swift */,
+				454F22FB2A7341F700D2DA7C /* Home */,
 				459B9B9D2A70E8EE0080360E /* SearchViews */,
-				459B9B9B2A70E5B30080360E /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -196,7 +201,6 @@
 				459B9B912A7051150080360E /* ApodModel.swift in Sources */,
 				459B9B972A70DBC80080360E /* HistoricalApodView.swift in Sources */,
 				459B9B822A7050550080360E /* DiscoverView.swift in Sources */,
-				459B9B9C2A70E5B30080360E /* TestView.swift in Sources */,
 				459B9B9A2A70E0530080360E /* HistoricalViewModel.swift in Sources */,
 				4570AA122A71F2D900E69B0B /* DetailButtonView.swift in Sources */,
 				459B9B932A70531A0080360E /* APODViewModel.swift in Sources */,
