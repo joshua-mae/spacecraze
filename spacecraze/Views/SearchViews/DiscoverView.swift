@@ -30,6 +30,9 @@ struct DiscoverView: View {
                     .sheet(isPresented: $showSheet) {
                         HistoricalApodView(selectedDate: selectedDate)
                     }
+                VStack{
+                    Text("Recently Viewed?")
+                }
             }
         }
         .background(.ultraThickMaterial)

@@ -9,6 +9,7 @@
 
 import SwiftUI
 import AVKit
+import UIKit
 
 struct APODView: View {
 
@@ -31,16 +32,33 @@ struct APODView: View {
           .toolbar {
               ToolbarItem(placement: .navigationBarLeading) {
                   Button {
-                      infoIsShowing = true
-                      
-                  } label: {
-                      Image(systemName: "info.circle")
-                  }
-                  .sheet(isPresented: $infoIsShowing) {
-                      DetailButtonView()
-                          .presentationDetents([.medium])
-                    }
 
+                  infoIsShowing = true
+
+                  } label: {
+
+                  Image(systemName: "info.circle")
+
+                  }
+
+                  .alert("Stats for nerds",isPresented: $infoIsShowing) {
+                      Button("Copy Source", role: .cancel) {
+                    if let apod = viewModel.apod {
+                        UIPasteboard.general.string = apod.hdurl?.description
+                    }
+                }
+
+                  Button("Ok") {}
+
+                  } message: {
+
+                  if let apod = viewModel.apod {
+
+                  Text("TITLE: \(apod.title ?? "")\nDATE: \(apod.date ?? "")\nMEDIA TYPE: \(apod.mediaType ?? "")\nSERVICE VERSION: \(apod.serviceVersion ?? "")\nSOURCE: \(apod.hdurl?.description ?? "")")
+
+                  }
+
+                  }
                   .tint(.primary)
               }
               ToolbarItem(placement: .navigationBarTrailing) {
@@ -55,7 +73,7 @@ struct APODView: View {
 
                           }
                             task.resume()
-                      }
+                        }
                       }
                         label: {
                       Image(systemName: "square.and.arrow.down")
@@ -66,7 +84,6 @@ struct APODView: View {
 
                   .tint(.primary)
               }
-              
           }
           .navigationBarTitleDisplayMode(.inline)
       }
@@ -97,12 +114,12 @@ extension APODView {
                                 .clipped()
                       }
                     placeholder: {
-                        Text(apod.title ?? "The beautiful space image is not loading :(")
+                        Text(apod.title ?? "")
                 }
                   }
             }
           } else {
-              Text("The beautiful space image is not loading :(")  // Placeholder
+              Text("")  // Placeholder
           }
         }
         .onAppear { viewModel.fetchImageOfTheDay() }
@@ -112,10 +129,14 @@ extension APODView {
         VStack (alignment: .leading, spacing: 10){
             if let apod = viewModel.apod {
                 
-                Text(apod.title ?? "This has no title")
+                Text(apod.title ?? "")
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                Text(apod.explanation ?? "This has no explanation")
+                Text(apod.date ?? "")
+                    .fontWeight(.semibold)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                Text(apod.explanation ?? "")
                     .font(.subheadline)
                     .foregroundColor(.primary)
             }
