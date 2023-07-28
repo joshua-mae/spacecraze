@@ -9,10 +9,10 @@ import SwiftUI
 import AVKit
 
 struct HistoricalApodView: View {
-    
+    @State private var isDownloaded = false
     let selectedDate: Date
     @EnvironmentObject private var viewModel: HistoricalViewModel
-    
+
     var body: some View {
         ScrollView{
                 gatherPhoto
@@ -20,7 +20,6 @@ struct HistoricalApodView: View {
             historicalApodDescription
         }
         .frame(maxWidth: .infinity)
-        .ignoresSafeArea()
         .background(.ultraThickMaterial)
     }
 }
@@ -29,6 +28,7 @@ struct HistoricalApodView_Previews: PreviewProvider {
     static var previews: some View {
         HistoricalApodView(selectedDate: Date())
             .environmentObject(HistoricalViewModel())
+
     }
 }
 
@@ -42,22 +42,20 @@ extension HistoricalApodView {
                       VideoPlayer(player: AVPlayer(url: URL(string: imageURL.description)!))
               } else {
                       AsyncImage(url: imageURL) { image in
-                          
                             image.resizable()
                                 .scaledToFit()
                                 .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? nil : UIScreen.main.bounds.width)
                                 .clipped()
-                                
                       }
                     placeholder: {
                         // Add a static image for if nothing populates
-                        Text(historical.title ?? "The beautiful space image is not loading :(")
-                }
+                        Text(historical.title ?? "")
+                    }
                   }
             }
           } else {
               // Add a static image for if nothing populates
-              Text("The beautiful space image is not loading :(")  // Placeholder
+              Text("")  // Placeholder
           }
         }
         .onAppear { viewModel.fetchImageOfThatDay(certainDate: selectedDate)
@@ -65,10 +63,29 @@ extension HistoricalApodView {
         }
     }
     
+    
     private var historicalApodDescription: some View {
-        VStack (alignment: .leading, spacing: 10){
+        VStack (alignment: .leading, spacing:20){
             if let historical = viewModel.historical {
-                
+                Button {
+                        let task = URLSession.shared.dataTask(with: historical.hdurl!) {data, _, _ in
+                            guard let data = data else {return}
+
+                            DispatchQueue.main.async {
+                                UIImageWriteToSavedPhotosAlbum(UIImage(data: data)!, nil, nil, nil)
+                                isDownloaded = true
+
+                            }
+                        }
+                          task.resume()
+                    }
+                      label: {
+                    Image(systemName: "square.and.arrow.down")
+                }
+                      .alert("Image Downloaded", isPresented: $isDownloaded) {
+                          Button("Ok", role: .cancel) {}
+                      }
+
                 Text(historical.title ?? "This has no title")
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
@@ -77,6 +94,7 @@ extension HistoricalApodView {
                     .foregroundColor(.primary)
             }
         }
+        .tint(.primary)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
     }

@@ -22,6 +22,7 @@ class APODViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     self?.apod = apod
                 }
+                
             } catch {
                 print(error)
             }

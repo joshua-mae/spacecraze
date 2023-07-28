@@ -69,6 +69,8 @@ struct APODView: View {
 
                               DispatchQueue.main.async {
                                   UIImageWriteToSavedPhotosAlbum(UIImage(data: data)!, nil, nil, nil)
+                                  isDownloaded = true
+
                               }
 
                           }
@@ -78,9 +80,9 @@ struct APODView: View {
                         label: {
                       Image(systemName: "square.and.arrow.down")
                   }
-                        .alert("Image Downloaded", isPresented: $isDownloaded) {
-                            Button("Ok", role: .cancel) {}
-                        }
+                    .alert("Image Downloaded", isPresented: $isDownloaded) {
+                        Button("Ok", role: .cancel) {}
+                    }
 
                   .tint(.primary)
               }

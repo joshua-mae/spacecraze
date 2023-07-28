@@ -17,6 +17,7 @@ struct DiscoverView: View {
       return min...max
     }
     
+    
     var body: some View {
         ScrollView {
             VStack{
@@ -30,9 +31,6 @@ struct DiscoverView: View {
                     .sheet(isPresented: $showSheet) {
                         HistoricalApodView(selectedDate: selectedDate)
                     }
-                VStack{
-                    Text("Recently Viewed?")
-                }
             }
         }
         .background(.ultraThickMaterial)
@@ -44,5 +42,6 @@ struct DiscoverView_Previews: PreviewProvider {
     static var previews: some View {
         DiscoverView()
             .environmentObject(HistoricalViewModel())
+
     }
 }

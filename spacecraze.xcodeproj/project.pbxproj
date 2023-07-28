@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4570AA122A71F2D900E69B0B /* DetailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4570AA112A71F2D900E69B0B /* DetailButtonView.swift */; };
+		453E24FC2A7430F400F902E0 /* ConstellationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E24FB2A7430F400F902E0 /* ConstellationView.swift */; };
 		459B9B802A7050550080360E /* spacecrazeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B7F2A7050550080360E /* spacecrazeApp.swift */; };
 		459B9B822A7050550080360E /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B812A7050550080360E /* DiscoverView.swift */; };
 		459B9B842A7050560080360E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 459B9B832A7050560080360E /* Assets.xcassets */; };
@@ -20,8 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		453E24FB2A7430F400F902E0 /* ConstellationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationView.swift; sourceTree = "<group>"; };
 		457059B82A7326DA00FEDE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		4570AA112A71F2D900E69B0B /* DetailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailButtonView.swift; sourceTree = "<group>"; };
 		459B9B7C2A7050550080360E /* spacecraze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spacecraze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		459B9B7F2A7050550080360E /* spacecrazeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spacecrazeApp.swift; sourceTree = "<group>"; };
 		459B9B812A7050550080360E /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
@@ -45,10 +45,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		453E24F82A741B8300F902E0 /* Constellations */ = {
+			isa = PBXGroup;
+			children = (
+				453E24FB2A7430F400F902E0 /* ConstellationView.swift */,
+			);
+			path = Constellations;
+			sourceTree = "<group>";
+		};
+		453E24F92A741B8700F902E0 /* Planets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Planets;
+			sourceTree = "<group>";
+		};
+		453E24FA2A741B9600F902E0 /* Moon */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Moon;
+			sourceTree = "<group>";
+		};
 		454F22FB2A7341F700D2DA7C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				4570AA112A71F2D900E69B0B /* DetailButtonView.swift */,
 				459B9B942A7054A50080360E /* APODView.swift */,
 			);
 			path = Home;
@@ -112,6 +133,9 @@
 		459B9B8F2A7050EE0080360E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				453E24FA2A741B9600F902E0 /* Moon */,
+				453E24F92A741B8700F902E0 /* Planets */,
+				453E24F82A741B8300F902E0 /* Constellations */,
 				454F22FB2A7341F700D2DA7C /* Home */,
 				459B9B9D2A70E8EE0080360E /* SearchViews */,
 			);
@@ -201,8 +225,8 @@
 				459B9B912A7051150080360E /* ApodModel.swift in Sources */,
 				459B9B972A70DBC80080360E /* HistoricalApodView.swift in Sources */,
 				459B9B822A7050550080360E /* DiscoverView.swift in Sources */,
+				453E24FC2A7430F400F902E0 /* ConstellationView.swift in Sources */,
 				459B9B9A2A70E0530080360E /* HistoricalViewModel.swift in Sources */,
-				4570AA122A71F2D900E69B0B /* DetailButtonView.swift in Sources */,
 				459B9B932A70531A0080360E /* APODViewModel.swift in Sources */,
 				459B9B802A7050550080360E /* spacecrazeApp.swift in Sources */,
 			);
@@ -337,7 +361,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = spacecraze/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Nasa Playground: APOD and More";
+				INFOPLIST_KEY_CFBundleDisplayName = AstronomyMore;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save the APOD to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -370,7 +394,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = spacecraze/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Nasa Playground: APOD and More";
+				INFOPLIST_KEY_CFBundleDisplayName = AstronomyMore;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save the APOD to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

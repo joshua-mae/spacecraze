@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+
+/// AstronomyMore App
+
 @main
 struct spacecrazeApp: App {
     
@@ -27,7 +30,10 @@ struct spacecrazeApp: App {
                 .tabItem{
                     Label("Discover", systemImage: "magnifyingglass")
                 }
-
+                ConstellationView()
+                .tabItem{
+                    Label("Constellations", systemImage: "star")
+                }
             }
             .accentColor(.purple)
                    
