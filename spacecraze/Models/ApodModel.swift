@@ -13,10 +13,10 @@ import Foundation
 
 // MARK: - APOD
 struct APOD: Decodable {
-    let date, explanation: String?
-    let hdurl: URL?
-    let mediaType, serviceVersion, title: String?
-    let url: URL?
+    var date, explanation: String
+    var hdurl: String
+    var mediaType, serviceVersion, title: String
+    var url: String
 
     enum CodingKeys: String, CodingKey {
         case date, explanation, hdurl

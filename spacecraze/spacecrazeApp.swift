@@ -8,13 +8,11 @@
 import SwiftUI
 
 
-/// AstronomyMore App
-
 @main
 struct spacecrazeApp: App {
     
     @StateObject private var vm = APODViewModel()
-    @StateObject private var hvm = HistoricalViewModel()
+//    @StateObject private var hvm = HistoricalViewModel()
     @AppStorage("isDarkMode") private var isDarkMode = false
 
     var body: some Scene {
@@ -26,11 +24,11 @@ struct spacecrazeApp: App {
                 .tabItem{
                     Label("Home", systemImage: "house")
                 }
-                DiscoverView()
-                    .environmentObject(hvm)
-                .tabItem{
-                    Label("Discover", systemImage: "magnifyingglass")
-                }
+//                DiscoverView()
+//                    .environmentObject(hvm)
+//                .tabItem{
+//                    Label("Discover", systemImage: "magnifyingglass")
+//                }
                 SettingsView()
                 .tabItem{
                     Label("Settings", systemImage: "gear")

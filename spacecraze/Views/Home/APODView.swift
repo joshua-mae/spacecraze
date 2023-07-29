@@ -5,8 +5,6 @@
 //  Created by Joshua Mae on 7/25/23.
 //
 
-// Change uiscreenmainbounds --> deprecated soon
-
 import SwiftUI
 import AVKit
 import UIKit
@@ -16,6 +14,10 @@ struct APODView: View {
     @EnvironmentObject private var viewModel: APODViewModel
     @State private var infoIsShowing = false
     @State private var isDownloaded = false
+    
+
+    
+    
     
     var body: some View {
       
@@ -43,38 +45,23 @@ struct APODView: View {
 
                   .alert("Stats for nerds",isPresented: $infoIsShowing) {
                       Button("Copy Source", role: .cancel) {
-                    if let apod = viewModel.apod {
-                        UIPasteboard.general.string = apod.hdurl?.description
-                    }
+                          UIPasteboard.general.string = viewModel.apod.hdurl
+                    
                 }
                   Button("Ok") {}
 
                   } message: {
-
-                  if let apod = viewModel.apod {
-
-                  Text("TITLE: \(apod.title ?? "")\nDATE: \(apod.date ?? "")\nMEDIA TYPE: \(apod.mediaType ?? "")\nSERVICE-VERSION: \(apod.serviceVersion ?? "")\nSOURCE: \(apod.hdurl?.description ?? "")")
-
-                  }
-
+                      Text("TITLE: \(viewModel.apod.title)\nDATE: \(viewModel.apod.date)\nMEDIA TYPE: \(viewModel.apod.mediaType)\nSERVICE-VERSION: \(viewModel.apod.serviceVersion)\nSOURCE: \(viewModel.apod.hdurl)")
                   }
                   .tint(.primary)
               }
               ToolbarItem(placement: .navigationBarTrailing) {
                   Button {
-                      if let apod = viewModel.apod {
-                          let task = URLSession.shared.dataTask(with: apod.hdurl!) {data, _, _ in
-                              guard let data = data else {return}
+                      guard let url = URL(string: viewModel.apod.hdurl) else { return }
+                      
+                      viewModel.downloadAndSaveImage(url: url)
+                      isDownloaded = true
 
-                              DispatchQueue.main.async {
-                                  UIImageWriteToSavedPhotosAlbum(UIImage(data: data)!, nil, nil, nil)
-                                  isDownloaded = true
-
-                              }
-
-                          }
-                            task.resume()
-                        }
                       }
                         label: {
                       Image(systemName: "square.and.arrow.down")
@@ -92,6 +79,8 @@ struct APODView: View {
   }
 }
 
+
+
 struct APODView_Previews: PreviewProvider {
     static var previews: some View {
         APODView()
@@ -103,12 +92,10 @@ extension APODView {
     
     private var photoBomb: some View {
         VStack {
-          if let apod = viewModel.apod {
-              if let imageURL = apod.hdurl, let media = apod.mediaType {
-                  if media.hasSuffix("mp4") {
-                      VideoPlayer(player: AVPlayer(url: URL(string: imageURL.description)!))
+            if viewModel.apod.mediaType.hasSuffix("mp4") {
+                VideoPlayer(player: AVPlayer(url: URL(string: viewModel.apod.hdurl.description)!))
               } else {
-                      AsyncImage(url: imageURL) { image in
+                  AsyncImage(url: URL(string: viewModel.apod.hdurl)) { image in
                             image.resizable()
                                 .scaledToFit()
                                 .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? nil : UIScreen.main.bounds.width)
@@ -116,32 +103,27 @@ extension APODView {
                             
                       }
                     placeholder: {
-                        Text(apod.title ?? "")
+                        Text(viewModel.apod.title)
                 }
-                  }
             }
-          } else {
-              Text("")  // Placeholder
-          }
         }
         .onAppear { viewModel.fetchImageOfTheDay() }
     }
     
     private var apodDescription: some View {
         VStack (alignment: .leading, spacing: 10){
-            if let apod = viewModel.apod {
                 
-                Text(apod.title ?? "")
+                Text(viewModel.apod.title)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                Text(apod.date ?? "")
+                Text(viewModel.apod.date)
                     .fontWeight(.semibold)
                     .font(.headline)
                     .foregroundColor(.primary)
-                Text(apod.explanation ?? "")
+                Text(viewModel.apod.explanation)
                     .font(.subheadline)
                     .foregroundColor(.primary)
-            }
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
