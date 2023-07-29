@@ -11,7 +11,7 @@ import Foundation
  API GET: https://api.nasa.gov/planetary/apod?api_key=SJMpssjqLzUKFoPwQ6b482bJ1mrxGjt3KqCgyHUx
  */
 
-// MARK: - Welcome
+// MARK: - APOD
 struct APOD: Decodable {
     let date, explanation: String?
     let hdurl: URL?

@@ -86,10 +86,13 @@ extension HistoricalApodView {
                           Button("Ok", role: .cancel) {}
                       }
 
-                Text(historical.title ?? "This has no title")
+                Text(historical.title ?? "")
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                Text(historical.explanation ?? "This has no explanation")
+                Text(historical.title ?? "")
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                Text(historical.explanation ?? "")
                     .font(.subheadline)
                     .foregroundColor(.primary)
             }

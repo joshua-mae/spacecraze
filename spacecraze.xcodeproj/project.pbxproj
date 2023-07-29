@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		453E24FC2A7430F400F902E0 /* ConstellationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E24FB2A7430F400F902E0 /* ConstellationView.swift */; };
 		459B9B802A7050550080360E /* spacecrazeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B7F2A7050550080360E /* spacecrazeApp.swift */; };
 		459B9B822A7050550080360E /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B812A7050550080360E /* DiscoverView.swift */; };
 		459B9B842A7050560080360E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 459B9B832A7050560080360E /* Assets.xcassets */; };
@@ -17,10 +16,11 @@
 		459B9B952A7054A50080360E /* APODView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B942A7054A50080360E /* APODView.swift */; };
 		459B9B972A70DBC80080360E /* HistoricalApodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B962A70DBC80080360E /* HistoricalApodView.swift */; };
 		459B9B9A2A70E0530080360E /* HistoricalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B9B992A70E0530080360E /* HistoricalViewModel.swift */; };
+		45B33EEB2A758CEE0097FCBD /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B33EEA2A758CEE0097FCBD /* SettingsView.swift */; };
+		45B33EED2A7597AA0097FCBD /* AcknowledgementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B33EEC2A7597AA0097FCBD /* AcknowledgementView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		453E24FB2A7430F400F902E0 /* ConstellationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationView.swift; sourceTree = "<group>"; };
 		457059B82A7326DA00FEDE85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		459B9B7C2A7050550080360E /* spacecraze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spacecraze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		459B9B7F2A7050550080360E /* spacecrazeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = spacecrazeApp.swift; sourceTree = "<group>"; };
@@ -32,6 +32,8 @@
 		459B9B942A7054A50080360E /* APODView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODView.swift; sourceTree = "<group>"; };
 		459B9B962A70DBC80080360E /* HistoricalApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalApodView.swift; sourceTree = "<group>"; };
 		459B9B992A70E0530080360E /* HistoricalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalViewModel.swift; sourceTree = "<group>"; };
+		45B33EEA2A758CEE0097FCBD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		45B33EEC2A7597AA0097FCBD /* AcknowledgementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcknowledgementView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,28 +47,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		453E24F82A741B8300F902E0 /* Constellations */ = {
-			isa = PBXGroup;
-			children = (
-				453E24FB2A7430F400F902E0 /* ConstellationView.swift */,
-			);
-			path = Constellations;
-			sourceTree = "<group>";
-		};
-		453E24F92A741B8700F902E0 /* Planets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Planets;
-			sourceTree = "<group>";
-		};
-		453E24FA2A741B9600F902E0 /* Moon */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Moon;
-			sourceTree = "<group>";
-		};
 		454F22FB2A7341F700D2DA7C /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,22 +113,29 @@
 		459B9B8F2A7050EE0080360E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				453E24FA2A741B9600F902E0 /* Moon */,
-				453E24F92A741B8700F902E0 /* Planets */,
-				453E24F82A741B8300F902E0 /* Constellations */,
 				454F22FB2A7341F700D2DA7C /* Home */,
-				459B9B9D2A70E8EE0080360E /* SearchViews */,
+				459B9B9D2A70E8EE0080360E /* Search */,
+				45B33EE92A758CAF0097FCBD /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		459B9B9D2A70E8EE0080360E /* SearchViews */ = {
+		459B9B9D2A70E8EE0080360E /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				459B9B812A7050550080360E /* DiscoverView.swift */,
 				459B9B962A70DBC80080360E /* HistoricalApodView.swift */,
 			);
-			path = SearchViews;
+			path = Search;
+			sourceTree = "<group>";
+		};
+		45B33EE92A758CAF0097FCBD /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				45B33EEA2A758CEE0097FCBD /* SettingsView.swift */,
+				45B33EEC2A7597AA0097FCBD /* AcknowledgementView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,11 +209,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				459B9B952A7054A50080360E /* APODView.swift in Sources */,
+				45B33EEB2A758CEE0097FCBD /* SettingsView.swift in Sources */,
 				459B9B912A7051150080360E /* ApodModel.swift in Sources */,
 				459B9B972A70DBC80080360E /* HistoricalApodView.swift in Sources */,
 				459B9B822A7050550080360E /* DiscoverView.swift in Sources */,
-				453E24FC2A7430F400F902E0 /* ConstellationView.swift in Sources */,
 				459B9B9A2A70E0530080360E /* HistoricalViewModel.swift in Sources */,
+				45B33EED2A7597AA0097FCBD /* AcknowledgementView.swift in Sources */,
 				459B9B932A70531A0080360E /* APODViewModel.swift in Sources */,
 				459B9B802A7050550080360E /* spacecrazeApp.swift in Sources */,
 			);
@@ -361,8 +349,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = spacecraze/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AstronomyMore;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_CFBundleDisplayName = SpaceCraze;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save the APOD to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -374,7 +362,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tothemoon.spacecraze;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shootforthemoon.spacecraze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -394,8 +382,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = spacecraze/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AstronomyMore;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_CFBundleDisplayName = SpaceCraze;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save the APOD to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -407,7 +395,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tothemoon.spacecraze;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shootforthemoon.spacecraze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

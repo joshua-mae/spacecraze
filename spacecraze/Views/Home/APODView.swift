@@ -47,14 +47,13 @@ struct APODView: View {
                         UIPasteboard.general.string = apod.hdurl?.description
                     }
                 }
-
                   Button("Ok") {}
 
                   } message: {
 
                   if let apod = viewModel.apod {
 
-                  Text("TITLE: \(apod.title ?? "")\nDATE: \(apod.date ?? "")\nMEDIA TYPE: \(apod.mediaType ?? "")\nSERVICE VERSION: \(apod.serviceVersion ?? "")\nSOURCE: \(apod.hdurl?.description ?? "")")
+                  Text("TITLE: \(apod.title ?? "")\nDATE: \(apod.date ?? "")\nMEDIA TYPE: \(apod.mediaType ?? "")\nSERVICE-VERSION: \(apod.serviceVersion ?? "")\nSOURCE: \(apod.hdurl?.description ?? "")")
 
                   }
 
@@ -114,6 +113,7 @@ extension APODView {
                                 .scaledToFit()
                                 .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? nil : UIScreen.main.bounds.width)
                                 .clipped()
+                            
                       }
                     placeholder: {
                         Text(apod.title ?? "")

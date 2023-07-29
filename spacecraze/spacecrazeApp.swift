@@ -15,6 +15,7 @@ struct spacecrazeApp: App {
     
     @StateObject private var vm = APODViewModel()
     @StateObject private var hvm = HistoricalViewModel()
+    @AppStorage("isDarkMode") private var isDarkMode = false
 
     var body: some Scene {
         WindowGroup {
@@ -30,12 +31,13 @@ struct spacecrazeApp: App {
                 .tabItem{
                     Label("Discover", systemImage: "magnifyingglass")
                 }
-                ConstellationView()
+                SettingsView()
                 .tabItem{
-                    Label("Constellations", systemImage: "star")
+                    Label("Settings", systemImage: "gear")
                 }
             }
-            .accentColor(.purple)
+            .preferredColorScheme(isDarkMode ? .dark : .light)
+            .accentColor(.blue)
                    
         }
     }
