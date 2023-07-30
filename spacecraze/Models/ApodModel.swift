@@ -14,7 +14,7 @@ import Foundation
 // MARK: - APOD
 struct APOD: Decodable {
     var date, explanation: String
-    var hdurl: String
+    var hdurl: String?
     var mediaType, serviceVersion, title: String
     var url: String
 
