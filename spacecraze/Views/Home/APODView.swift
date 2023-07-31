@@ -18,7 +18,6 @@ struct APODView: View {
     @State private var isDownloaded = false
     @AppStorage("isDarkMode") private var isDarkMode = false
 
-
     var body: some View {
       NavigationView {
           ScrollView{
@@ -41,7 +40,7 @@ struct APODView: View {
                   Image(systemName: "info.circle")
 
                   }
-                  .alert("Stats for nerds",isPresented: $infoIsShowing) {
+                  .alert("APOD Info",isPresented: $infoIsShowing) {
                       Button("Copy Source", role: .cancel) {
                           UIPasteboard.general.string = viewModel.apod.hdurl
                 }
@@ -56,7 +55,6 @@ struct APODView: View {
                            SOURCE - \(viewModel.apod.hdurl!)
                            """)
                   }
-                  .tint(.primary)
               }
               if viewModel.apod.mediaType != "video" {
                   ToolbarItem(placement: .navigationBarTrailing) {
@@ -72,12 +70,13 @@ struct APODView: View {
                         .alert("Image Downloaded", isPresented: $isDownloaded) {
                             Button("Ok", role: .cancel) {}
                         }
-                      .tint(.primary)
                   }
               }
               
           }
           .navigationBarTitleDisplayMode(.inline)
+          .tint(.indigo)
+
       }
       .navigationViewStyle(.stack)
   }

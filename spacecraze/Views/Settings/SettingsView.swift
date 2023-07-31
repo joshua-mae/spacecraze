@@ -33,6 +33,7 @@ struct SettingsView: View {
                     }
                 }
             }
+            
             .scrollContentBackground(.hidden)
             .background(.ultraThickMaterial)
             .navigationTitle("Settings")
