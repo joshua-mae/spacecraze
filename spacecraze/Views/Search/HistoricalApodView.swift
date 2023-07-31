@@ -34,7 +34,12 @@ struct HistoricalApodView: View {
                 gatherPhoto
                 .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
             if viewModel.historical.mediaType != "video" {
-                downloadButton
+                HStack{
+                    downloadButton
+                    Spacer()
+                }
+                .padding(.horizontal,20)
+                .padding(.top,10)
             }
             historicalApodDescription
         }
@@ -71,8 +76,6 @@ extension HistoricalApodView {
                         Text(viewModel.historical.title)
                     }
                   }
-            
-          
         }
         .onAppear { viewModel.fetchImageOfThatDay(certainDate: selectedDate)
             
@@ -81,7 +84,7 @@ extension HistoricalApodView {
     
     
     private var historicalApodDescription: some View {
-        VStack (alignment: .leading, spacing:20){
+        VStack (alignment: .leading, spacing:10){
             Text(viewModel.historical.title)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)

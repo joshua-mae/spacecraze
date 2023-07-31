@@ -33,10 +33,8 @@ struct AllView: View {
             }
 
         }
-        
         .preferredColorScheme(isDarkMode ? .dark : .light)
-        .accentColor(.indigo)
-        
+        .tint(.indigo)
     }
 }
 
