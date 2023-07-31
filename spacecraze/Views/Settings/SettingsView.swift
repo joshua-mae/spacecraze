@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage("isDarkMode") private var isDarkMode = false
-
+    
     var body: some View {
         NavigationView {
             List{
@@ -24,6 +24,7 @@ struct SettingsView: View {
                         Text("Version Number")
                         Text(Bundle.main.releaseVersionNumber ?? "")
                             .frame(maxWidth: .infinity, alignment: .trailing)
+                        
                     }
                     HStack {
                         Text("Build Number")
@@ -32,6 +33,8 @@ struct SettingsView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(.ultraThickMaterial)
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
         }

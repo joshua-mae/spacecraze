@@ -6,7 +6,23 @@
 //
 
 import SwiftUI
-import AVKit
+import UIKit
+import WebKit
+
+struct WebView : UIViewRepresentable {
+
+  let urlString: String
+
+  func makeUIView(context: Context) -> WKWebView  {
+    return WKWebView()
+  }
+
+  func updateUIView(_ uiView: WKWebView, context: Context) {
+    guard let url = URL(string: urlString) else { return }
+    let request = URLRequest(url: url)
+    uiView.load(request)
+  }
+}
 
 struct HistoricalApodView: View {
     @State private var isDownloaded = false
@@ -17,6 +33,9 @@ struct HistoricalApodView: View {
         ScrollView{
                 gatherPhoto
                 .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
+            if viewModel.historical.mediaType != "video" {
+                downloadButton
+            }
             historicalApodDescription
         }
         .frame(maxWidth: .infinity)
@@ -36,12 +55,12 @@ extension HistoricalApodView {
     
     private var gatherPhoto: some View {
         VStack {
-          if let historical = viewModel.historical {
-              if let imageURL = historical.hdurl, let media = historical.mediaType {
-                  if media.hasSuffix("mp4") {
-                      VideoPlayer(player: AVPlayer(url: URL(string: imageURL.description)!))
-              } else {
-                      AsyncImage(url: imageURL) { image in
+                  if viewModel.historical.mediaType.hasSuffix("video") {
+                          WebView(urlString: viewModel.historical.url)
+                          .frame(maxWidth: .infinity)
+                          .frame(height: 400)
+                  } else {
+                  AsyncImage(url: URL(string: viewModel.historical.hdurl!)) { image in
                             image.resizable()
                                 .scaledToFit()
                                 .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? nil : UIScreen.main.bounds.width)
@@ -49,14 +68,11 @@ extension HistoricalApodView {
                       }
                     placeholder: {
                         // Add a static image for if nothing populates
-                        Text(historical.title ?? "")
+                        Text(viewModel.historical.title)
                     }
                   }
-            }
-          } else {
-              // Add a static image for if nothing populates
-              Text("")  // Placeholder
-          }
+            
+          
         }
         .onAppear { viewModel.fetchImageOfThatDay(certainDate: selectedDate)
             
@@ -66,39 +82,39 @@ extension HistoricalApodView {
     
     private var historicalApodDescription: some View {
         VStack (alignment: .leading, spacing:20){
-            if let historical = viewModel.historical {
-                Button {
-                        let task = URLSession.shared.dataTask(with: historical.hdurl!) {data, _, _ in
-                            guard let data = data else {return}
-
-                            DispatchQueue.main.async {
-                                UIImageWriteToSavedPhotosAlbum(UIImage(data: data)!, nil, nil, nil)
-                                isDownloaded = true
-
-                            }
-                        }
-                          task.resume()
-                    }
-                      label: {
-                    Image(systemName: "square.and.arrow.down")
-                }
-                      .alert("Image Downloaded", isPresented: $isDownloaded) {
-                          Button("Ok", role: .cancel) {}
-                      }
-
-                Text(historical.title ?? "")
+            Text(viewModel.historical.title)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                Text(historical.title ?? "")
+            Text(viewModel.historical.date)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                Text(historical.explanation ?? "")
+            Text(viewModel.historical.explanation)
                     .font(.subheadline)
                     .foregroundColor(.primary)
-            }
+            
         }
         .tint(.primary)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
+    }
+    
+    private var downloadButton : some View {
+        Button {
+            guard let url = URL(string: viewModel.historical.hdurl!) else { return }
+            let task = URLSession.shared.dataTask(with: url) {data, _, _ in
+                    guard let data = data else {return}
+                    DispatchQueue.main.async {
+                        UIImageWriteToSavedPhotosAlbum(UIImage(data: data)!, nil, nil, nil)
+                        isDownloaded = true
+                    }
+                }
+                  task.resume()
+            }
+              label: {
+            Image(systemName: "square.and.arrow.down")
+        }
+              .alert("Image Downloaded", isPresented: $isDownloaded) {
+                  Button("Ok", role: .cancel) {}
+              }
     }
 }

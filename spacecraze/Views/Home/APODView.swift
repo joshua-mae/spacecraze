@@ -5,25 +5,27 @@
 //  Created by Joshua Mae on 7/25/23.
 //
 
-// Change uiscreenmainbounds --> deprecated soon
-
 import SwiftUI
-import AVKit
 import UIKit
+import WebKit
+
+// Find way to fix force unwrap for the hdurls
 
 struct APODView: View {
 
     @EnvironmentObject private var viewModel: APODViewModel
     @State private var infoIsShowing = false
     @State private var isDownloaded = false
-    
+    @AppStorage("isDarkMode") private var isDarkMode = false
+
+
     var body: some View {
-      
       NavigationView {
           ScrollView{
               VStack {
                   photoBomb
                       .shadow(color: Color.black.opacity(0.3), radius: 20, x: 0, y: 10)
+                  
                   apodDescription
               }
           }
@@ -32,7 +34,6 @@ struct APODView: View {
           .toolbar {
               ToolbarItem(placement: .navigationBarLeading) {
                   Button {
-
                   infoIsShowing = true
 
                   } label: {
@@ -40,57 +41,49 @@ struct APODView: View {
                   Image(systemName: "info.circle")
 
                   }
-
                   .alert("Stats for nerds",isPresented: $infoIsShowing) {
                       Button("Copy Source", role: .cancel) {
-                    if let apod = viewModel.apod {
-                        UIPasteboard.general.string = apod.hdurl?.description
-                    }
+                          UIPasteboard.general.string = viewModel.apod.hdurl
                 }
                   Button("Ok") {}
 
                   } message: {
-
-                  if let apod = viewModel.apod {
-
-                  Text("TITLE: \(apod.title ?? "")\nDATE: \(apod.date ?? "")\nMEDIA TYPE: \(apod.mediaType ?? "")\nSERVICE-VERSION: \(apod.serviceVersion ?? "")\nSOURCE: \(apod.hdurl?.description ?? "")")
-
-                  }
-
+                      Text("""
+                           TITLE - \(viewModel.apod.title)
+                           DATE - \(viewModel.apod.date)
+                           MEDIA TYPE - \(viewModel.apod.mediaType)
+                           SERVICE-VERSION - \(viewModel.apod.serviceVersion)
+                           SOURCE - \(viewModel.apod.hdurl!)
+                           """)
                   }
                   .tint(.primary)
               }
-              ToolbarItem(placement: .navigationBarTrailing) {
-                  Button {
-                      if let apod = viewModel.apod {
-                          let task = URLSession.shared.dataTask(with: apod.hdurl!) {data, _, _ in
-                              guard let data = data else {return}
-
-                              DispatchQueue.main.async {
-                                  UIImageWriteToSavedPhotosAlbum(UIImage(data: data)!, nil, nil, nil)
-                                  isDownloaded = true
-
-                              }
+              if viewModel.apod.mediaType != "video" {
+                  ToolbarItem(placement: .navigationBarTrailing) {
+                      Button {
+                          guard let url = URL(string: viewModel.apod.hdurl!) else { return }
+                          viewModel.downloadAndSaveImage(url: url)
+                          isDownloaded = true
 
                           }
-                            task.resume()
-                        }
+                            label: {
+                          Image(systemName: "square.and.arrow.down")
                       }
-                        label: {
-                      Image(systemName: "square.and.arrow.down")
+                        .alert("Image Downloaded", isPresented: $isDownloaded) {
+                            Button("Ok", role: .cancel) {}
+                        }
+                      .tint(.primary)
                   }
-                    .alert("Image Downloaded", isPresented: $isDownloaded) {
-                        Button("Ok", role: .cancel) {}
-                    }
-
-                  .tint(.primary)
               }
+              
           }
           .navigationBarTitleDisplayMode(.inline)
       }
       .navigationViewStyle(.stack)
   }
 }
+
+
 
 struct APODView_Previews: PreviewProvider {
     static var previews: some View {
@@ -103,12 +96,12 @@ extension APODView {
     
     private var photoBomb: some View {
         VStack {
-          if let apod = viewModel.apod {
-              if let imageURL = apod.hdurl, let media = apod.mediaType {
-                  if media.hasSuffix("mp4") {
-                      VideoPlayer(player: AVPlayer(url: URL(string: imageURL.description)!))
+            if viewModel.apod.mediaType.hasSuffix("video") {
+                WebView(urlString: viewModel.apod.url)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 400)
               } else {
-                      AsyncImage(url: imageURL) { image in
+                  AsyncImage(url: URL(string: viewModel.apod.hdurl!)) { image in
                             image.resizable()
                                 .scaledToFit()
                                 .frame(width: UIDevice.current.userInterfaceIdiom == .pad ? nil : UIScreen.main.bounds.width)
@@ -116,32 +109,27 @@ extension APODView {
                             
                       }
                     placeholder: {
-                        Text(apod.title ?? "")
+                        Text(viewModel.apod.title)
                 }
-                  }
             }
-          } else {
-              Text("")  // Placeholder
-          }
         }
         .onAppear { viewModel.fetchImageOfTheDay() }
     }
     
     private var apodDescription: some View {
         VStack (alignment: .leading, spacing: 10){
-            if let apod = viewModel.apod {
                 
-                Text(apod.title ?? "")
+                Text(viewModel.apod.title)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                Text(apod.date ?? "")
+                Text(viewModel.apod.date)
                     .fontWeight(.semibold)
                     .font(.headline)
                     .foregroundColor(.primary)
-                Text(apod.explanation ?? "")
+                Text(viewModel.apod.explanation)
                     .font(.subheadline)
                     .foregroundColor(.primary)
-            }
+            
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
