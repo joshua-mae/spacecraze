@@ -13,7 +13,7 @@ struct DiscoverView: View {
     @State private var showSheet = false
     @State private var showRandom = false
     var dateRange: ClosedRange<Date> {
-      let min = Calendar.current.date(from: DateComponents(year: 1995, month: 6,day: 16))!
+      let min = Calendar.current.date(from: DateComponents(year: 1995, month: 6,day: 20))!
       let max = Date()
       return min...max
     }

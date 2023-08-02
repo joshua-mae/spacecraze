@@ -31,7 +31,6 @@ struct AllView: View {
                     Label("Settings", systemImage: "gear")
                 }
             }
-
         }
         .preferredColorScheme(isDarkMode ? .dark : .light)
         .tint(.indigo)
