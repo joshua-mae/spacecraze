@@ -9,8 +9,6 @@ import SwiftUI
 import UIKit
 import WebKit
 
-// Find way to fix force unwrap for the hdurls
-
 struct APODView: View {
 
     @EnvironmentObject private var viewModel: APODViewModel
@@ -50,8 +48,8 @@ struct APODView: View {
                       Text("""
                            TITLE - \(viewModel.apod.title)
                            DATE - \(viewModel.apod.date)
-                           MEDIA TYPE - \(viewModel.apod.mediaType)
-                           SERVICE-VERSION - \(viewModel.apod.serviceVersion)
+                           MEDIA_TYPE - \(viewModel.apod.mediaType)
+                           SERVICE_VERSION - \(viewModel.apod.serviceVersion)
                            SOURCE - \(viewModel.apod.hdurl!)
                            """)
                   }

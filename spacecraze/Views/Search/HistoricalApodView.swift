@@ -72,7 +72,6 @@ extension HistoricalApodView {
                                 .clipped()
                       }
                     placeholder: {
-                        // Add a static image for if nothing populates
                         Text(viewModel.historical.title)
                     }
                   }
@@ -85,15 +84,29 @@ extension HistoricalApodView {
     
     private var historicalApodDescription: some View {
         VStack (alignment: .leading, spacing:10){
-            Text(viewModel.historical.title)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
-            Text(viewModel.historical.date)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
-            Text(viewModel.historical.explanation)
-                    .font(.subheadline)
-                    .foregroundColor(.primary)
+            if viewModel.historical.title == "" {
+                Text("The API request does not have a title for this APOD")
+            } else {
+                Text(viewModel.historical.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+            }
+
+            if viewModel.historical.date == "" {
+                Text("The API request does not have the date for this APOD")
+            } else {
+                Text(viewModel.historical.date)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+            }
+            if viewModel.historical.explanation == "" {
+                Text("The API request does not have the explanation for this APOD")
+            }else {
+                Text(viewModel.historical.explanation)
+                        .font(.subheadline)
+                        .foregroundColor(.primary)
+            }
+
             
         }
         .tint(.primary)
