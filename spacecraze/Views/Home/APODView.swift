@@ -116,16 +116,28 @@ extension APODView {
     private var apodDescription: some View {
         VStack (alignment: .leading, spacing: 10){
                 
+            if viewModel.apod.title == "" {
+                Text("The API request does not have a title for this APOD or it is out of service at this moment")
+            } else {
                 Text(viewModel.apod.title)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.primary)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+            }
+
+            if viewModel.apod.date == "" {
+                Text("The API request does not have the date for this APOD or it is out of service at this moment")
+            } else {
                 Text(viewModel.apod.date)
-                    .fontWeight(.semibold)
-                    .font(.headline)
-                    .foregroundColor(.primary)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.primary)
+            }
+            if viewModel.apod.explanation == "" {
+                Text("The API request does not have the explanation for this APOD or it is out of service at this moment")
+            }else {
                 Text(viewModel.apod.explanation)
-                    .font(.subheadline)
-                    .foregroundColor(.primary)
+                        .font(.subheadline)
+                        .foregroundColor(.primary)
+            }
             
         }
         .frame(maxWidth: .infinity, alignment: .leading)
